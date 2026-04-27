@@ -1,0 +1,27 @@
+:host {
+  display: block;
+  min-height: 100dvh;
+  background: #f8fbff;
+}
+
+.role-page {
+  min-height: 100dvh;
+  padding: 32px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+h1 {
+  margin: 10px 0 14px;
+  color: #0f172a;
+}
+
+p {
+  color: #475569;
+  max-width: 60ch;
+}
