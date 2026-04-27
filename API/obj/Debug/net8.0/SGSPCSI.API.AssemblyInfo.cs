@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SGSPCSI.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b23ba66a9a5997f5da368462eee663c6cff04f02")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2c79bbe0c19795bacb4ab585f3144223607507af")]
 [assembly: System.Reflection.AssemblyProductAttribute("SGSPCSI.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SGSPCSI.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

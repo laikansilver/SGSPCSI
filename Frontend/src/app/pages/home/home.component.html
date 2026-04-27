@@ -1,0 +1,34 @@
+﻿<div class="home-shell">
+  <section class="home-card">
+    <p class="eyebrow">SGSPCSI Angular</p>
+    <h1>Bienvenido, {{ currentUser.name }}</h1>
+    <p class="description">
+      Esta es la pantalla base después del login. Aquí iremos montando el layout principal y cada módulo del sistema.
+    </p>
+
+    <div class="info-grid">
+      <article>
+        <span>Usuario</span>
+        <strong>{{ currentUser.username }}</strong>
+      </article>
+      <article>
+        <span>Rol detectado</span>
+        <strong>{{ currentUser.role }}</strong>
+      </article>
+      <article>
+        <span>Próximo paso</span>
+        <strong>Construir el layout general</strong>
+      </article>
+    </div>
+
+    <div class="role-launcher">
+      <h2>Ir a una vista por rol</h2>
+      <div class="role-grid">
+        <a *ngFor="let card of roleCards" class="role-card" [routerLink]="card.path">
+          <span>{{ card.title }}</span>
+          <p>{{ card.description }}</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
