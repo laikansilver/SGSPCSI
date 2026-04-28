@@ -1,0 +1,36 @@
+﻿:root {
+  color-scheme: light;
+  --primary: #004B87;
+  --primary-dark: #003B6D;
+  --primary-light: #69B3E7;
+  --success: #34C759;
+  --danger: #FF3B30;
+  --warning: #FF9500;
+  --text: #004B87;
+  --text-light: #63666A;
+  --text-muted: #97999B;
+  --bg: #C8D8EB;
+  --bg-light: #ffffff;
+  --border: #C8C9C7;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --shadow-lg: rgba(0, 0, 0, 0.15);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #c8d8eb;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input {
+  font: inherit;
+}
