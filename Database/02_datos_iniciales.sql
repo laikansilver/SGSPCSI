@@ -41,15 +41,15 @@ GO
 -- 3. TABLA: estado_solicitud (Estados de Solicitud)
 -- ============================================
 
-INSERT INTO [estado_solicitud] ([clave], [nombre], [secuencia])
+INSERT INTO [estado_solicitud] ([clave], [nombre], [es_terminal], [activa])
 VALUES 
-('ABIERTA', 'Abierta', 1),
-('ASIGNADA', 'Asignada', 2),
-('EN_PROCESO', 'En Proceso', 3),
-('RESUELTA', 'Resuelta', 4),
-('CERRADA', 'Cerrada', 5),
-('RECHAZADA', 'Rechazada', 6),
-('SUSPENDIDA', 'Suspendida', 7)
+('ABIERTA', 'Abierta', 0, 1),
+('ASIGNADA', 'Asignada', 0, 1),
+('EN_PROCESO', 'En Proceso', 0, 1),
+('RESUELTA', 'Resuelta', 0, 1),
+('CERRADA', 'Cerrada', 1, 1),
+('RECHAZADA', 'Rechazada', 1, 1),
+('SUSPENDIDA', 'Suspendida', 0, 1)
 GO
 
 -- ============================================
@@ -84,13 +84,13 @@ GO
 
 INSERT INTO [area] ([area_padre_id], [clave], [nombre], [tipo_area], [nivel], [activa])
 VALUES 
-(NULL, 'DIR', 'Dirección General', 'Dirección', 0, 1),
-(1, 'DTIN', 'Dirección de Tecnología e Innovación', 'Dirección', 1, 1),
-(1, 'DADM', 'Dirección Administrativa', 'Dirección', 1, 1),
-(2, 'COORD_DS', 'Coordinación de Desarrollo de Software', 'Coordinación', 2, 1),
-(2, 'COORD_IT', 'Coordinación de Infraestructura TI', 'Coordinación', 2, 1),
-(2, 'COORD_SO', 'Coordinación de Soporte Operativo', 'Coordinación', 2, 1),
-(3, 'COORD_RRHH', 'Coordinación de Recursos Humanos', 'Coordinación', 2, 1)
+(NULL, 'DIR', 'Dirección General', 'Dirección', 1, 1),
+(1, 'DTIN', 'Dirección de Tecnología e Innovación', 'Dirección', 2, 1),
+(1, 'DADM', 'Dirección Administrativa', 'Dirección', 2, 1),
+(2, 'COORD_DS', 'Coordinación de Desarrollo de Software', 'Coordinación', 3, 1),
+(2, 'COORD_IT', 'Coordinación de Infraestructura TI', 'Coordinación', 3, 1),
+(2, 'COORD_SO', 'Coordinación de Soporte Operativo', 'Coordinación', 3, 1),
+(3, 'COORD_RRHH', 'Coordinación de Recursos Humanos', 'Coordinación', 3, 1)
 GO
 
 -- ============================================
@@ -111,16 +111,16 @@ GO
 -- 8. TABLA: menu_opcion (Opciones de Menú)
 -- ============================================
 
-INSERT INTO [menu_opcion] ([clave], [nombre], [descripcion], [url_modulo], [sistema_id], [orden], [activo])
+INSERT INTO [menu_opcion] ([clave], [nombre], [ruta], [icono], [orden], [activa], [menu_padre_id])
 VALUES 
-('SOLICITUDES', 'Solicitudes', 'Gestión de solicitudes', '/solicitudes', 1, 1, 1),
-('MIS_SOLICITUDES', 'Mis Solicitudes', 'Mis solicitudes creadas', '/mis-solicitudes', 1, 2, 1),
-('TAREAS', 'Tareas', 'Gestión de tareas de desarrollo', '/tareas', 1, 3, 1),
-('PROYECTOS', 'Proyectos', 'Gestión de proyectos', '/proyectos', 1, 4, 1),
-('REPORTES', 'Reportes', 'Generación de reportes', '/reportes', 1, 5, 1),
-('USUARIOS', 'Usuarios', 'Administración de usuarios', '/usuarios', 1, 10, 1),
-('ROLES', 'Roles', 'Administración de roles', '/roles', 1, 11, 1),
-('CONFIGURACION', 'Configuración', 'Configuración del sistema', '/config', 1, 12, 1)
+('SOLICITUDES', 'Solicitudes', '/solicitudes', 'icon-requests', 1, 1, NULL),
+('MIS_SOLICITUDES', 'Mis Solicitudes', '/mis-solicitudes', 'icon-my-requests', 2, 1, NULL),
+('TAREAS', 'Tareas', '/tareas', 'icon-tasks', 3, 1, NULL),
+('PROYECTOS', 'Proyectos', '/proyectos', 'icon-projects', 4, 1, NULL),
+('REPORTES', 'Reportes', '/reportes', 'icon-reports', 5, 1, NULL),
+('USUARIOS', 'Usuarios', '/usuarios', 'icon-users', 10, 1, NULL),
+('ROLES', 'Roles', '/roles', 'icon-roles', 11, 1, NULL),
+('CONFIGURACION', 'Configuración', '/config', 'icon-config', 12, 1, NULL)
 GO
 
 -- ============================================
