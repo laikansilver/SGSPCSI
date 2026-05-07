@@ -1,5 +1,5 @@
 -- ============================================================
--- ISSEG_DB - Script de creacion de base de datos
+-- SGSPCSI_DB - Script de creacion de base de datos
 -- Motor: SQL Server 2022
 -- Modelo: SGSPCSI 4NF (33 tablas)
 -- ============================================================
@@ -7,17 +7,17 @@
 USE [master];
 GO
 
-IF DB_ID(N'ISSEG_DB') IS NOT NULL
+IF DB_ID(N'SGSPCSI_DB') IS NOT NULL
 BEGIN
-    ALTER DATABASE [ISSEG_DB] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-    DROP DATABASE [ISSEG_DB];
+    ALTER DATABASE [SGSPCSI_DB] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+    DROP DATABASE [SGSPCSI_DB];
 END;
 GO
 
-CREATE DATABASE [ISSEG_DB];
+CREATE DATABASE [SGSPCSI_DB];
 GO
 
-USE [ISSEG_DB];
+USE [SGSPCSI_DB];
 GO
 
 -- ============================================================
@@ -64,6 +64,10 @@ CREATE TABLE dbo.area (
     CONSTRAINT UQ_area_nombre UNIQUE (nombre),
     CONSTRAINT CK_area_nivel CHECK (nivel >= 1)
 );
+GO
+
+SET ANSI_NULLS ON;
+SET QUOTED_IDENTIFIER ON;
 GO
 
 CREATE UNIQUE INDEX UX_area_clave_notnull ON dbo.area(clave) WHERE clave IS NOT NULL;
@@ -539,7 +543,7 @@ CREATE TABLE dbo.evento_participante (
 GO
 
 -- ============================================================
--- 6) INDICES DE APOYO OPERATIVO
+-- 9) INDICES DE APOYO OPERATIVO
 -- ============================================================
 
 CREATE INDEX IX_usuario_area_usuario_activo ON dbo.usuario_area(usuario_id, activo);
@@ -553,5 +557,5 @@ CREATE INDEX IX_notificacion_usuario_leida ON dbo.notificacion(usuario_id, leida
 CREATE INDEX IX_actividad_reciente_fecha ON dbo.actividad_reciente(fecha_actividad DESC);
 GO
 
-PRINT 'Esquema ISSEG_DB creado correctamente en SQL Server 2022.';
+PRINT 'Esquema SGSPCSI_DB creado correctamente en SQL Server 2022.';
 GO

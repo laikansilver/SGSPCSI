@@ -170,7 +170,7 @@ DELETE /api/notificaciones/{id}                     # Eliminar
    - Actualizar `ConnectionStrings.DefaultConnection` con tu servidor SQL Server
    ```json
    "ConnectionStrings": {
-	 "DefaultConnection": "Server=TU_SERVIDOR;Database=ISSEG_DB;Trusted_Connection=true;TrustServerCertificate=true;"
+   "DefaultConnection": "Server=TU_SERVIDOR;Database=SGSPCSI_DB;Trusted_Connection=true;TrustServerCertificate=true;"
    }
    ```
 

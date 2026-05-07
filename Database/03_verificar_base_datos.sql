@@ -1,14 +1,14 @@
 -- ============================================================
--- SCRIPT DE VERIFICACION DE BASE DE DATOS ISSEG_DB
+-- SCRIPT DE VERIFICACION DE BASE DE DATOS SGSPCSI_DB
 -- Motor: SQL Server 2022+
 -- Proposito: Validar que la base de datos está completamente creada
 -- ============================================================
 
-USE [ISSEG_DB]
+USE [SGSPCSI_DB]
 GO
 
 PRINT '=========================================='
-PRINT 'VERIFICACION DE BASE DE DATOS ISSEG_DB'
+PRINT 'VERIFICACION DE BASE DE DATOS SGSPCSI_DB'
 PRINT '=========================================='
 PRINT ''
 
@@ -97,7 +97,8 @@ SELECT
 		 WHEN i.is_unique = 1 THEN 'Único'
 		 ELSE 'Índice Normal' END AS [Tipo]
 FROM sys.indexes i
-WHERE OBJECT_DB_ID(i.object_id) = DB_ID() AND i.name IS NOT NULL
+WHERE OBJECT_SCHEMA_NAME(i.object_id) = 'dbo'
+	AND i.name IS NOT NULL
 ORDER BY [Tabla], i.is_primary_key DESC, i.name
 GO
 
@@ -146,7 +147,7 @@ PRINT '=========================================='
 PRINT 'VERIFICACION COMPLETADA EXITOSAMENTE'
 PRINT '=========================================='
 PRINT ''
-PRINT 'La base de datos ISSEG_DB está lista para usar.'
+PRINT 'La base de datos SGSPCSI_DB está lista para usar.'
 PRINT 'Próximos pasos:'
 PRINT '  1. Crear usuarios para la aplicación'
 PRINT '  2. Configurar las credenciales de base de datos'

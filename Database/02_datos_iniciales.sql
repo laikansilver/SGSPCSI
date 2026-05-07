@@ -1,10 +1,14 @@
 -- ============================================
 -- SCRIPT DE DATOS INICIALES
--- Base de datos: ISSEG_DB
+-- Base de datos: SGSPCSI_DB
 -- Inserta datos en catálogos y tablas maestras
 -- ============================================
 
-USE ISSEG_DB
+SET ANSI_NULLS ON;
+SET QUOTED_IDENTIFIER ON;
+GO
+
+USE SGSPCSI_DB
 GO
 
 -- ============================================
@@ -127,7 +131,7 @@ GO
 -- Resumen de inserciones
 -- ============================================
 
-PRINT '✓ Base de datos ISSEG_DB inicializada con datos catálogo'
+PRINT '✓ Base de datos SGSPCSI_DB inicializada con datos catálogo'
 PRINT '✓ Roles: 7'
 PRINT '✓ Tipos de solicitud: 7'
 PRINT '✓ Estados: 7'

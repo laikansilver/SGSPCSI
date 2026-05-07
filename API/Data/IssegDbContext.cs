@@ -56,6 +56,22 @@ namespace SGSPCSI.API.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            // Apply snake_case naming convention to all tables and columns
+                foreach (var entity in modelBuilder.Model.GetEntityTypes())
+                {
+                    // Convert table name to snake_case using the CLASS name (singular)
+                    // This prevents EF Core from pluralizing the name
+                    var tableName = entity.ClrType.Name;
+                    entity.SetTableName(ToSnakeCase(tableName));
+
+                    // Convert column names to snake_case
+                    foreach (var property in entity.GetProperties())
+                    {
+                        var columnName = ToSnakeCase(property.Name);
+                        property.SetColumnName(columnName);
+                    }
+                }
+
             // Configuración de Rol
             modelBuilder.Entity<Rol>(entity =>
             {
@@ -247,6 +263,14 @@ namespace SGSPCSI.API.Data
                     .WithMany(e => e.HistorialesEstado)
                     .HasForeignKey(e => e.SolicitudId)
                     .OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne(e => e.EstadoAnterior)
+                    .WithMany(e => e.HistorialesEstadoAnterior)
+                    .HasForeignKey(e => e.EstadoAnteriorId)
+                    .OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(e => e.EstadoNuevo)
+                    .WithMany(e => e.HistorialesEstadoNuevo)
+                    .HasForeignKey(e => e.EstadoNuevoId)
+                    .OnDelete(DeleteBehavior.Restrict);
                 entity.HasOne(e => e.CambiadoPor)
                     .WithMany(e => e.HistorialEstadosCambiados)
                     .HasForeignKey(e => e.CambiadoPorUsuarioId)
@@ -383,7 +407,7 @@ namespace SGSPCSI.API.Data
                 entity.HasOne(e => e.Solicitud)
                     .WithMany(e => e.Tareas)
                     .HasForeignKey(e => e.SolicitudId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             // Configuración de TareaDesarrolloAsignacion
@@ -396,6 +420,10 @@ namespace SGSPCSI.API.Data
                     .WithMany(e => e.Asignaciones)
                     .HasForeignKey(e => e.TareaDesarrolloId)
                     .OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne(e => e.Usuario)
+                    .WithMany(e => e.TareasAsignadas)
+                    .HasForeignKey(e => e.UsuarioId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             // Configuración de ActividadReciente
@@ -438,7 +466,7 @@ namespace SGSPCSI.API.Data
                 entity.HasOne(e => e.Solicitud)
                     .WithMany(e => e.ProyectosSolicitudes)
                     .HasForeignKey(e => e.SolicitudId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             // Configuración de ProyectoMiembro
@@ -452,6 +480,10 @@ namespace SGSPCSI.API.Data
                     .WithMany(e => e.Miembros)
                     .HasForeignKey(e => e.ProyectoId)
                     .OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne(e => e.Usuario)
+                    .WithMany(e => e.ProyectosMiembro)
+                    .HasForeignKey(e => e.UsuarioId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             // Configuración de DocumentoProyecto
@@ -495,7 +527,32 @@ namespace SGSPCSI.API.Data
                     .WithMany(e => e.Participantes)
                     .HasForeignKey(e => e.EventoCalendarioId)
                     .OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne(e => e.Usuario)
+                    .WithMany(e => e.EventosParticipando)
+                    .HasForeignKey(e => e.UsuarioId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
+        }
+
+        /// <summary>
+        /// Converts a PascalCase or camelCase string to snake_case.
+        /// </summary>
+        private static string ToSnakeCase(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return name;
+
+            var result = new System.Text.StringBuilder();
+            for (int i = 0; i < name.Length; i++)
+            {
+                char c = name[i];
+                if (i > 0 && char.IsUpper(c))
+                {
+                    result.Append('_');
+                }
+                result.Append(char.ToLower(c));
+            }
+            return result.ToString();
         }
     }
 }

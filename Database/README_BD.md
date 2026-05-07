@@ -1,9 +1,9 @@
-# Script de Creación de Base de Datos ISSEG
+# Script de Creación de Base de Datos SGSPCSI
 ## SQL Server 2022
 
 ### 📋 Contenido
 
-Este conjunto de scripts crea la base de datos **ISSEG_DB** para el sistema de gestión de solicitudes y proyectos.
+Este conjunto de scripts crea la base de datos **SGSPCSI_DB** para el sistema de gestión de solicitudes y proyectos.
 
 #### Archivos incluidos:
 

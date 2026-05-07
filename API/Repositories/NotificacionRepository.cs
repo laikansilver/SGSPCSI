@@ -26,7 +26,7 @@ namespace SGSPCSI.API.Repositories
 
         public async Task<IEnumerable<Notificacion>> GetNotificacionesUsuarioAsync(int usuarioId, int? limit = null)
         {
-            var query = _dbSet
+            IQueryable<Notificacion> query = _dbSet
                 .Where(n => n.UsuarioId == usuarioId)
                 .OrderByDescending(n => n.FechaCreacion);
 

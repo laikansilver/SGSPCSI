@@ -1,6 +1,6 @@
 @echo off
 REM ============================================================
-REM Script de Automatizacion: Crear Base de Datos ISSEG_DB
+REM Script de Automatizacion: Crear Base de Datos SGSPCSI_DB
 REM Motor: SQL Server 2022+
 REM Descripcion: Ejecuta todos los scripts SQL en orden
 REM ============================================================
@@ -10,7 +10,7 @@ setlocal enabledelayedexpansion
 cls
 echo.
 echo ============================================================
-echo  CREACION AUTOMATICA DE BASE DE DATOS ISSEG_DB
+echo  CREACION AUTOMATICA DE BASE DE DATOS SGSPCSI_DB
 echo  SQL Server 2022+
 echo ============================================================
 echo.
@@ -30,7 +30,7 @@ cd /d "%~dp0"
 
 echo.
 echo [1/3] Eliminando base de datos anterior si existe...
-sqlcmd -S . -E -Q "IF DB_ID(N'ISSEG_DB') IS NOT NULL BEGIN ALTER DATABASE [ISSEG_DB] SET SINGLE_USER WITH ROLLBACK IMMEDIATE; DROP DATABASE [ISSEG_DB]; END;" -C -m -1
+sqlcmd -S . -E -Q "IF DB_ID(N'SGSPCSI_DB') IS NOT NULL BEGIN ALTER DATABASE [SGSPCSI_DB] SET SINGLE_USER WITH ROLLBACK IMMEDIATE; DROP DATABASE [SGSPCSI_DB]; END;" -C -m -1
 if errorlevel 1 (
 	echo ERROR: No se pudo eliminar la base de datos anterior
 	pause
@@ -65,17 +65,17 @@ echo ============================================================
 echo.
 
 REM Verificación rápida
-sqlcmd -S . -E -Q "USE ISSEG_DB; DECLARE @tablas INT; SELECT @tablas = COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'; DECLARE @roles INT; SELECT @roles = COUNT(*) FROM rol; SELECT 'RESULTADO' AS [Tipo], 'EXITOSO' AS [Estado] WHERE @tablas = 33 AND @roles = 7 UNION ALL SELECT 'Tablas Creadas', CAST(@tablas AS VARCHAR(10)) UNION ALL SELECT 'Roles Cargados', CAST(@roles AS VARCHAR(10));" -C -m -1
+sqlcmd -S . -E -Q "USE SGSPCSI_DB; DECLARE @tablas INT; SELECT @tablas = COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'; DECLARE @roles INT; SELECT @roles = COUNT(*) FROM rol; SELECT 'RESULTADO' AS [Tipo], 'EXITOSO' AS [Estado] WHERE @tablas = 33 AND @roles = 7 UNION ALL SELECT 'Tablas Creadas', CAST(@tablas AS VARCHAR(10)) UNION ALL SELECT 'Roles Cargados', CAST(@roles AS VARCHAR(10));" -C -m -1
 
 if errorlevel 0 (
 	echo.
 	echo ============================================================
-	echo  ✓ BASE DE DATOS ISSEG_DB CREADA EXITOSAMENTE
+	echo  ✓ BASE DE DATOS SGSPCSI_DB CREADA EXITOSAMENTE
 	echo ============================================================
 	echo.
 	echo Informacion:
 	echo  - Servidor: . (Local)
-	echo  - Base de Datos: ISSEG_DB
+	echo  - Base de Datos: SGSPCSI_DB
 	echo  - Tablas: 33
 	echo  - Datos Iniciales: Cargados
 	echo.

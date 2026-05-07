@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SGSPCSI.API.DTOs;
 using SGSPCSI.API.Models;
@@ -5,6 +6,7 @@ using SGSPCSI.API.Services;
 
 namespace SGSPCSI.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class TareasDesarrolloController : ControllerBase

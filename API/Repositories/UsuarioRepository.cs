@@ -7,6 +7,7 @@ namespace SGSPCSI.API.Repositories
     public interface IUsuarioRepository : IRepository<Usuario>
     {
         Task<Usuario?> GetByCorreoAsync(string correo);
+        Task<Usuario?> GetByLoginAsync(string loginUsuario);
         Task<Usuario?> GetWithRolesAndAreasAsync(int usuarioId);
         Task<IEnumerable<Usuario>> GetActualizarPorAreaAsync(int areaId);
     }
@@ -20,6 +21,15 @@ namespace SGSPCSI.API.Repositories
         public async Task<Usuario?> GetByCorreoAsync(string correo)
         {
             return await _dbSet.FirstOrDefaultAsync(u => u.CorreoInstitucional == correo);
+        }
+
+        public async Task<Usuario?> GetByLoginAsync(string loginUsuario)
+        {
+            return await _dbSet
+                .Include(u => u.Credencial)
+                .Include(u => u.UsuariosRoles)
+                    .ThenInclude(ur => ur.Rol)
+                .FirstOrDefaultAsync(u => u.Credencial != null && u.Credencial.LoginUsuario == loginUsuario);
         }
 
         public async Task<Usuario?> GetWithRolesAndAreasAsync(int usuarioId)
